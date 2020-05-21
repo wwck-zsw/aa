@@ -1,0 +1,15 @@
+
+server:
+  port: 8081
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7776:7777/eureka/
+spring:
+  application:
+    name: bookprovider8081
+  datasource:
+    url: jdbc:mysql://localhost:3306/books?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root

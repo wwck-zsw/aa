@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script th:src="@{/js/jquery-2.1.4.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/bootstrap-3.3.7-dist/css/bootstrap.css}">
+    <script th:src="@{/bootstrap-3.3.7-dist/js/bootstrap.js}"></script>
+</head>
+<script type="text/javascript">
+    $(function(){
+        selectAll();
+        $("button[name='sel']").click(function(){
+            var data=$("#selForm").serialize();
+            selectAll(data);
+        })
+        $("button[name='book_save']").click(function(){
+            var data=$("#saveForm").serialize();
+            $.post("/save",data,function(result){
+                if(result=="success"){
+                    alert("success");
+                    location.href="/toList";
+                }else{
+                    alert("failed");
+                }
+            })
+        })
+    })
+    function selectAll(data){
+        $("#table tr:gt(0)").remove();
+        $.get("/selectAll",data,function(result){
+            $.each(result,function(index,i){
+                var tr="<tr><td>"+i.id+"</td><td><a name='sel' selId='"+i.id+"' data-toggle='modal' data-target='#selModal'>"+i.title+"</a></td><td>"+i.classid+"</td><td>"+new Date(i.createdate).toLocaleDateString()+"</td></tr>";
+                $("#table").append(tr);
+            })
+            $("a[name='sel']").click(function(){
+                var id=$(this).attr("selId");
+                $.get("/selectById","id="+id,function(res){
+                    $("#title").html(res.title);
+                    $("#createdate").html(new Date(res.createdate).toLocaleDateString());
+                    $("#classid").html(res.classid);
+                    $("#content").val(res.content);
+                })
+            })
+        })
+    }
+</script>
+<body>
+    <div class="container">
+        <div align="center">
+            <h2>常见问题检索</h2>
+            <form id="selForm">
+                请输入查询关键字:<input type="text" name="title"/>
+                <button type="button" name="sel">查询</button>
+            </form>
+        </div>
+        <div class="row">
+            <div align="right">
+            <a data-toggle="modal" data-target="#saveModal">添加常见问题</a>
+            </div>
+            <table class="table table-bordered" id="table">
+                <tr>
+                    <td>编号</td>
+                    <td>标题</td>
+                    <td>分类</td>
+                    <td>创建时间</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="saveModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">添加问题</h4>
+                </div>
+                <div class="modal-body">
+                   <form id="saveForm">
+                       <table class="table table-bordered">
+                           <tr>
+                               <td>标题</td>
+                               <td><input type="text" placeholder="给错误取一个有趣的名字吧QAQ" name="title"/></td>
+                           </tr>
+                           <tr>
+                               <td>内容</td>
+                               <td><textarea name="content" placeholder="详细描述一下错误"></textarea></td>
+                           </tr>
+                           <tr>
+                               <td>分类编号</td>
+                               <td><input type="text" name="classid"/></td>
+                           </tr>
+                       </table>
+                   </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" name="book_save">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="selModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabl">问题详情</h4>
+                </div>
+                <div class="modal-body">
+                        <table class="table table-bordered">
+                            <tr>
+                                <td>标题</td>
+                                <td id="title"></td>
+                            </tr>
+                            <tr>
+                                <td>内容</td>
+                                <td><textarea id="content" disabled></textarea></td>
+                            </tr>
+                            <tr>
+                                <td>分类编号</td>
+                                <td id="classid"></td>
+                            </tr>
+                            <tr>
+                                <td>创建日期</td>
+                                <td id="createdate"></td>
+                            </tr>
+                        </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

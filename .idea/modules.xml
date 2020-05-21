@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/book-consumer8080/book-consumer8080.iml" filepath="$PROJECT_DIR$/book-consumer8080/book-consumer8080.iml" />
+      <module fileurl="file://$PROJECT_DIR$/book-provider8081/book-provider8081.iml" filepath="$PROJECT_DIR$/book-provider8081/book-provider8081.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bookdemo.iml" filepath="$PROJECT_DIR$/bookdemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka7776/eureka7776.iml" filepath="$PROJECT_DIR$/eureka7776/eureka7776.iml" />
+      <module fileurl="file://$PROJECT_DIR$/eureka7777/eureka7777.iml" filepath="$PROJECT_DIR$/eureka7777/eureka7777.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,12 @@
+
+server:
+  port: 7777
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7776/eureka/
+  instance:
+    appname: eureka7777
+spring:
+  application:
+    name: eureka7777

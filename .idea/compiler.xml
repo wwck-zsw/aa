@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="book-consumer8080" />
+        <module name="book-provider8081" />
+        <module name="eureka7776" />
+        <module name="eureka7777" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="book-consumer8080" target="1.8" />
+      <module name="book-provider8081" target="1.8" />
+      <module name="eureka7776" target="1.8" />
+      <module name="eureka7777" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
